@@ -1,0 +1,15 @@
+fusion
+vegan
+vegetarian
+american
+east-european
+Indian
+Cajun
+Chinese
+Jamaican
+East-African
+Filipino
+Thai
+Korean
+Seafood
+Mexican
