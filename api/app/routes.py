@@ -1,33 +1,80 @@
 from app import app, db
-from app.models import User
+from app.models import User, TokenList
 from flask_login import current_user, login_user, logout_user
 
 from flask import request, jsonify
 from werkzeug.urls import url_parse
+import jwt
+import datetime
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    json_data = request.json
+    tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
+    db.session.delete(tokenList)
+    db.session.commit()
+    status = 'true'
+    message = "Succesfully logged out"
 
-@app.route('/check', methods=['GET'])
-def check():
-    if current_user.is_authenticated:
-        return jsonify({'result': 'true'})
+    return jsonify({'result': status,
+            'description': message})
 
-    return jsonify({'result': 'false'})
+@app.route('/check_login', methods=['POST'])
+def check_login():
+    json_data = request.json
+    tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
+    username = ""
+    
+    if tokenList is not None:
+        print(datetime.datetime.utcnow())
+        print(tokenList.expiration)
+        if (datetime.datetime.utcnow() < tokenList.expiration):
+            status = 'true'
+            message = "Successfully logged in."
+            user = User.query.filter_by(id=decode_auth_token(json_data['auth_token'])).first()
+            username = user.username
+        else:
+            tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
+            db.session.delete(tokenList)
+            db.session.commit()
+            status = 'false'
+            message = "Failed to log in - expired token"
+
+    else:
+        status = 'false'
+        message = "Can not find token"
+
+    return jsonify({'result': status,
+                    'description': message,
+                    'username': username})
+
+    
+def addTokenList(user_id, auth_token):
+    tokenList = TokenList(user_id=user_id, auth_token=auth_token)
+    db.session.add(tokenList)
+    db.session.commit()
+    print("Added token to database")
 
 
 @app.route('/login', methods=['POST'])
 def login():
-    if current_user.is_authenticated:
-        return jsonify({'result': 'true'})
-
     json_data = request.json
     user_email = User.query.filter_by(email=json_data['username']).first()
     user_username = User.query.filter_by(username=json_data['username']).first()
     status = 'false'
+    auth_token = "None"
+    message = "Failed to log in."
 
     if user_email is not None:
         if (user_email.check_password(json_data['password'])):
             status = 'true'
-            login_user(user_username,  remember=True)
+            login_user(user_email,  remember=True)
+            auth_token = user_email.encode_auth_token(user_id=user_email.id)
+            if auth_token:
+                message = "Successfully logged in."
+                auth_token = auth_token.decode()
+                addTokenList(user_email.id, auth_token)
+             
         else:
             status = 'false'
 
@@ -35,17 +82,21 @@ def login():
         if (user_username.check_password(json_data['password'])):
             status = 'true'
             login_user(user_username,  remember=True)
+            auth_token = user_username.encode_auth_token(user_id=user_username.id)
+            if auth_token:
+                message = "Successfully logged in."
+                auth_token = auth_token.decode()
+                addTokenList(user_username.id, auth_token)
+                
         else:
             status = 'false'
     else:
         status = 'false'
 
-    return jsonify({'result': status})
+    return jsonify({'result': status,
+                    'description': message,
+                    'auth_token': auth_token})
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return jsonify({'result': "Successfully Logout"})
 
 @app.route('/register', methods=['POST'])
 def register():

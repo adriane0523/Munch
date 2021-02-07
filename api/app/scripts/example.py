@@ -8,7 +8,7 @@ google_places = GooglePlaces(YOUR_API_KEY)
 query_result = google_places.nearby_search(
 
     lat_lng={'lat':19.148320, 'lng':72.888794},
-   keyword='Fish and Chips',
+   keyword='Thai food',
         radius=20000, types=[types.TYPE_FOOD])
 # If types param contains only 1 item the request to Google Places API
 # will be send as type param to fullfil:
