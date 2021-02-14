@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for r in restaurants %}
+    <p>
+    {{ r.id }}
+    {{ r.name }}
+    <a href='http://127.0.0.1:5000/edit_menu/{{r.id}}'>add</a>
+    </p>
+    {% endfor %}
+{% endblock %}

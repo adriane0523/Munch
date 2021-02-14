@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 import time
 
 from app import app, db
-from app.models import Restaurant, Menu 
+from app.models import Restaurant 
 
 from flask import request, jsonify
 from werkzeug.urls import url_parse

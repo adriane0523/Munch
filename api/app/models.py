@@ -81,6 +81,15 @@ class User_Restaurant(db.Model):
     rating = db.Column(db.Float, nullable=True)
     like = db.Column(db.Boolean, nullable=True)
 
+class User_Menu_Item(db.Model):
+    __tablename__ = 'user_menu_item'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=True)
+    restaurant_munch_id = db.Column(db.Integer, nullable=True)
+    menu_item_id = db.Column(db.Integer, nullable=True)
+    rating = db.Column(db.Float, nullable=True)
+    like = db.Column(db.Boolean, nullable=True)
+
 #restaurant model
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
@@ -88,7 +97,6 @@ class Restaurant(db.Model):
     place_id = db.Column(db.String, unique=True, nullable=True)
     name = db.Column(db.String, nullable=True)
     addr = db.Column(db.String, nullable=True)
-    name = db.Column(db.String, nullable=True)
     latitude = db.Column(db.String, nullable=True)
     longitude = db.Column(db.String, nullable=True)
     hours = db.Column(db.String, nullable=True)
@@ -99,18 +107,16 @@ class Restaurant(db.Model):
     munch_type = db.Column(db.String, nullable=True)
     price_level = db.Column(db.String, nullable=True)
 
-
-class Menu(db.Model):
-    id = db.Column(db.Integer, unique=True, primary_key=True)
-
 class Menu_Item(db.Model):
+    __tablename__ = 'menu item'
     id = db.Column(db.Integer, primary_key=True)
     header_name = db.Column(db.String, nullable=True)
     name = db.Column(db.String, nullable=True)
     description = db.Column(db.String, nullable=True)
+    contains = db.Column(db.String, nullable=True)
     price = db.Column(db.String, nullable=True)
     image = db.Column(db.String, nullable=True)
-    menu = db.Column(db.Integer, unique=True)
+    restaurant_id = db.Column(db.Integer, nullable=True)
 
 
 #list of tokens

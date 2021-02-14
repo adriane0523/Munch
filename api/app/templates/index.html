@@ -1,35 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
 
-<div class="container">
-    <form>
-        <div class="form-group form" >
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="files" name="files" multiple="multiple"><br><br> 
-            
-          </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+{% block content %}
+
+<h1>{{title}}</h1>
+
+    {% for i in menu_item %}
+
+    <p>
+    <img src="{{i.imgage}}"> <br>
+    {{ i.id }} | {{ i.name }} | {{ i.description}} | {{i.contains}} |{{i.price}}
+    </p>
+
+    {% endfor %}
+
+    <form action="" method="post" enctype="multipart/form-data" >
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name }}
+        </p>
+        <p>
+            {{ form.header_name.label }}<br>
+            {{ form.header_name }}
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description }}
+        </p>
+        <p>
+            {{ form.price.label }}<br>
+            {{ form.price }}
+        </p>
+            <p>
+            {{ form.image.label }}<br>
+            {{ form.image }}
+        </p>
+   
+            <input type="submit">
     </form>
-</div>
-
-</body>
-</html>
+{% endblock %}
