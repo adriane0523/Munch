@@ -30,8 +30,9 @@ def check_login():
         print(tokenList.expiration)
         if (datetime.datetime.utcnow() < tokenList.expiration):
             status = 'true'
-            message = "Successfully logged in."
-            user = User.query.filter_by(id=decode_auth_token(json_data['auth_token'])).first()
+            message = "Successfully logged in."\
+            
+            user = User.query.filter_by(id=tokenList.user_id).first()
             username = user.username
         else:
             tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
@@ -149,3 +150,16 @@ def validate_email(email):
     if user is not None:
         return False
     return True
+
+@app.route('/get_username', methods=['POST'])
+def get_username():
+    json_data = request.json
+    tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
+    user = User.query.filter_by(id=tokenList.user_id).first()
+
+    status = 'True'
+    message = "fetched username"
+
+    return jsonify({'result': status,
+            'username' : user.username,
+            'description': message})

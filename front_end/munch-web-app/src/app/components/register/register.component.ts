@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {RegisterService } from './register.service';
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registerService : RegisterService
+    private registerService : RegisterService,
+    private router: Router,
     ) {}
 
   ngOnInit(): void {
@@ -32,8 +34,13 @@ export class RegisterComponent implements OnInit {
     console.warn(this.myForm.value);
     console.log("this is working");
     this.registerService.register(this.myForm.get("username")!.value, 
-    this.myForm.get("password")!.value,this.myForm.get("email")!.value).subscribe(result=>console.log(result));
-  
+    this.myForm.get("password")!.value,this.myForm.get("email")!.value).subscribe(result=>{
+        console.log(result);
+      if (result.result ==="True")
+      {
+        this.router.navigate(['/login'])
+      } 
+    });
   }
 
   checkPasswords(){

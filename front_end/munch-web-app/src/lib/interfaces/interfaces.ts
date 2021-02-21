@@ -15,3 +15,9 @@ export interface authToken{
   result:string;
   username:string;
 }
+
+export interface register{
+  result:string;
+  emai:string;
+  username:string;
+}

@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { login, authToken } from "src/lib/interfaces/interfaces";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 import { CheckLoginService } from 'src/lib/check-login.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
@@ -21,13 +21,14 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private checkLogin: CheckLoginService
+    private checkLogin: CheckLoginService,
+
    )  { }
 
   ngOnInit(): void {
 
     this.checkLogin.isUserLoggedIn().subscribe((result:authToken)=>{
-      if (result.result === "true")
+      if (result && result.result === "true")
       {
         this.router.navigate(['/map'])
       }
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(1)]],
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
+
   }
 
   onSubmit() {

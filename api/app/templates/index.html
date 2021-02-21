@@ -7,9 +7,11 @@
     {% for i in menu_item %}
 
     <p>
-    <img src="{{i.imgage}}"> <br>
+    <img src="/static/photos/{{i.image}}"> <br>
     {{ i.id }} | {{ i.name }} | {{ i.description}} | {{i.contains}} |{{i.price}}
+    <hr>
     </p>
+
 
     {% endfor %}
 
@@ -23,7 +25,7 @@
             {{ form.header_name.label }}<br>
             {{ form.header_name }}
         </p>
-        <p>
+        <p style="width:">
             {{ form.description.label }}<br>
             {{ form.description }}
         </p>

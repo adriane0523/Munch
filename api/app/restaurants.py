@@ -4,6 +4,7 @@ from app.models import User, Restaurant
 from flask import render_template
 import difflib
 from flask import request, jsonify
+import random
 
 @app.route('/search')
 def search():
@@ -50,3 +51,6 @@ def get_reccomended_restaurants(query):
     pass
 
 
+@app.route('/home')
+def home():
+    pass

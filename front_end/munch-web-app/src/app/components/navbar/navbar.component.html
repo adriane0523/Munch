@@ -24,9 +24,13 @@
     <span class="example-spacer"></span>
     <span class="nav-tool-items"></span>
 
-
-
-    
+    <div *ngIf="getLogin">
+    <p style="margin:20px;padding:0; display:inline">Hello, {{username}}</p>
+    <a mat-button mat-raised-button (click)="logout()" routerLinkActive="active">Log out</a>
+    </div> 
+    <div *ngIf="!getLogin"> 
     <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
     <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+    </div> 
+  
   </mat-toolbar>

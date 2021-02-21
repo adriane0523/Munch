@@ -1,6 +1,43 @@
-<h1>Munch Map</h1>
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search</mat-label>
+    <input matInput>
+    <button mat-button matSuffix aria-label="search">
+    <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+  <div class="filter">
+    
+  <mat-checkbox #c (click)="toggle(!c.checked)">Map View</mat-checkbox>
+    <button mat-stroked-button>Quick</button>
+    <button mat-stroked-button>Food</button>
+    <button mat-stroked-button>Places</button>
+  </div>
+</form>
+
+
+<div *ngIf="!c.checked">
+<ul id="myUL">
+  <li><a href="#">Adele</a></li>
+  <li><a href="#">Agnes</a></li>
+
+  <li><a href="#">Billy</a></li>
+  <li><a href="#">Bob</a></li>
+
+  <li><a href="#">Calvin</a></li>
+  <li><a href="#">Christina</a></li>
+  <li><a href="#">Cindy</a></li>
+</ul>
+ 
+</div>
+
+
+<div *ngIf="c.checked">
+  <!-- this creates a google map on the page with the given lat/lng from -->
+  <!-- the component as the initial center of the map: -->
+  <agm-map [zoom]="18" [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</div>

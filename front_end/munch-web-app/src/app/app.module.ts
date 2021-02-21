@@ -20,7 +20,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LoginComponent,
     RegisterComponent,
     MapComponent,
-    NavbarComponent
+    NavbarComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBZmVjjr2QxBHa6UzRC9lEX-JjrqbmXGeY'
     }),

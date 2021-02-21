@@ -1,21 +1,21 @@
 import os
 from app import app, db
 from app.models import User, Restaurant, Menu_Item
-from flask import render_template
+from flask import render_template, flash
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from flask_uploads import UploadSet, IMAGES
 from flask_wtf.file import FileAllowed, FileRequired, FileField
 from werkzeug.utils import secure_filename
 
 
-file_path = './photos/'
+file_path = './app/static/photos/'
 images = UploadSet('images', IMAGES)
 class MenuForm(FlaskForm):
     name = StringField('Name', validators=[])
     header_name = StringField('Header name', validators=[])
-    description = StringField('Description', validators=[])
+    description = TextAreaField('Description', validators=[])
     contains = StringField('Contains', validators=[])
     price = StringField('Price', validators=[])
     image = FileField('Image', validators=[])
@@ -35,12 +35,35 @@ def edit_menu(id):
     print(form.image.data)
     if form.validate_on_submit():
         f = form.image.data
-        filename = secure_filename(f.filename)
-        f.save(os.path.join(file_path, filename))
-     
-        return "Sucessfully uploaded"
+        if (f != None):
+            filename = secure_filename(f.filename)
+            f.save(os.path.join(file_path, filename))
+            r = Restaurant.query.filter_by(id=id).first()
+            menu = Menu_Item(
+                header_name = form.header_name.data,
+                name = form.name.data,
+                description = form.description.data,
+                price = form.price.data,
+                image = form.image.data.filename,
+                restaurant_id = r.id
+            )
+        else:
+            r = Restaurant.query.filter_by(id=id).first()
+            menu = Menu_Item(
+                header_name = form.header_name.data,
+                name = form.name.data,
+                description = form.description.data,
+                price = form.price.data,
+                restaurant_id = r.id
+            )
+
+        db.session.add(menu)
+        db.session.commit()
+        flash('Successfully added menu items')
+
     else:
-        print("failed")
+        flash('Failed to add menu items')
+
     return render_template('index.html', title=r.name, menu_item=m,id=id, form=form)
 
 
@@ -90,28 +113,6 @@ def edit(id):
     
     return jsonify({'result': "success",
                     'description': "Successfully added items to restaurants"})
-
-@app.route('/add_menu/<id>')
-def add_menu(id):
-    json_data = request.json    
-    r = Restaurant.query.filter_by(id=id).first()
-    print(json_data)
-    if (r == None):
-        return jsonify({'result': "failed",
-                    'description': "failed to add menu items"})
- 
-    menu = Menu_Item(
-        header_name = json_data["header_name"],
-        name = json_data["name"],
-        description = json_data["description"],
-        contains = json_data["contains"],
-        price = json_data["price"],
-        image = json_data["image"],
-        restaurant_id = r.id
-    )
-    
-    return jsonify({'result': "sucess",
-                    'description': "successfully to add menu items"})
 
 
 

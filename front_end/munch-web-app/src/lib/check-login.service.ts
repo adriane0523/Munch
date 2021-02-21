@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 })
 export class CheckLoginService {
 
-  private apiUrl = "http://127.0.0.1:5000/check_login";
+  private apiUrl = "http://127.0.0.1:5000";
   constructor(
     private http: HttpClient,
     private httpHelper: HttpHelperService,
@@ -23,9 +23,17 @@ export class CheckLoginService {
   };
 
   isUserLoggedIn():Observable<authToken>{
-    return this.http.post<authToken>(this.apiUrl, {"auth_token":localStorage.getItem("token")}, this.httpOptions).pipe(
+    return this.http.post<authToken>(this.apiUrl + '/check_login', {"auth_token":localStorage.getItem("token")}, this.httpOptions).pipe(
       tap(_ => console.log("Success")),
       catchError(this.httpHelper.handleError<authToken>('check-login'))
     );
   }
+
+  logout():Observable<authToken>{
+    return this.http.post<authToken>(this.apiUrl + '/logout', {"auth_token":localStorage.getItem("token")}, this.httpOptions).pipe(
+      tap(_ => console.log("Success")),
+      catchError(this.httpHelper.handleError<authToken>('logout'))
+    );
+  }
+
 }
