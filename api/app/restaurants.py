@@ -1,6 +1,6 @@
 import os
 from app import app, db
-from app.models import User, Restaurant
+from app.models import User, Restaurant, Menu_Item
 from flask import render_template
 import difflib
 from flask import request, jsonify
@@ -50,7 +50,49 @@ def search():
 def get_reccomended_restaurants(query):
     pass
 
+def get_menu(id):
+    m = Menu_Item.query.filter_by(restaurant_id=id).all()
+    result = []
+    for i in m:
+        result.append(
+            {
+                "header_name":i.header_name,
+                "name":i.name,
+                "description":i.description,
+                "contains":i.contains,
+                "price":i.price,
+                "image":i.image,
+                "restaurant_id":i.restaurant_id
+            }
+        )
+    
+    return result
 
-@app.route('/home')
+
+@app.route('/home', methods=['POST'])
 def home():
-    pass
+    restaurants = Restaurant.query.all()
+    count = 0
+    result = []
+    while (count <= 10):
+        i = restaurants[count]
+        result.append( {
+                "id":i.id,
+                "place_id": i.place_id,
+                "name": i.name,
+                "addr": i.addr,
+                "latitude": i.latitude,
+                "longitude": i.longitude,
+                "hours" : i.hours,
+                "google_rating" : i.google_rating,
+                "google_total_user_rating" : i.google_total_user_rating,
+                "munch_rating" : i.munch_rating,
+                "munch_type" : i.munch_type,
+                "price_level" : i.price_level,
+                "menu":get_menu(i.id)
+        })
+        print(get_menu(i.id))
+        count+=1
+    return  jsonify({'result': result,
+                    'description': "fetched restaurant items"
+                    })

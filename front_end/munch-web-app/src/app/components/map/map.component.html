@@ -19,16 +19,20 @@
 
 
 <div *ngIf="!c.checked">
-<ul id="myUL">
-  <li><a href="#">Adele</a></li>
-  <li><a href="#">Agnes</a></li>
+<ul *ngFor="let r of restautants" id="myUL">
+  <li><a href="#">
+    <div class="text">
+      <p class="first">{{r.name}}</p>
+      <p class second> {{r.price_level}} {{r.addr}}</p>
+    </div>
+   
+    <div class="img">
+      <p>{{r.menu[0].name}}</p>
+      <img src="{{getImage(r)}}">
+    </div>
+  
+  </a></li>
 
-  <li><a href="#">Billy</a></li>
-  <li><a href="#">Bob</a></li>
-
-  <li><a href="#">Calvin</a></li>
-  <li><a href="#">Christina</a></li>
-  <li><a href="#">Cindy</a></li>
 </ul>
  
 </div>
