@@ -1,11 +1,9 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-
     <ng-flash-message></ng-flash-message>
-    <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-      </mat-card-header>
 
+    <mat-card class="box">
+    
+    <img src="/assets/logo.svg" alt="logo">
       <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
@@ -16,8 +14,8 @@
             <input type="password" formControlName="password" matInput placeholder="Password">
           </mat-form-field>
         </mat-card-content>
-        <button type="submit" [disabled]="!myForm.valid" mat-stroked-button color="accent" class="btn-block" >Log in</button>
+        <button class="submit" type="submit" [disabled]="!myForm.valid" mat-stroked-button color="accent" class="btn-block" >Log in</button>
+        <a class="register" routerLink="register" routerLinkActive="active" (click)="register()">Register for a new Account</a>
       </form>
     </mat-card>
-  
-  </div>
+</div>

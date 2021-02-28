@@ -22,6 +22,8 @@ export class RegisterService {
     private httpHelper: HttpHelperService
   ) { }
 
+
+
   register(username:string, password:string, email:string): Observable<register> {
     return this.http.post<register>(this.apiUrl, {username:username, password:password, email:email}, this.httpOptions).pipe(
       tap(_ => console.log("Success")),

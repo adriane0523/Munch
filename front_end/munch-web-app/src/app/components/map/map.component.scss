@@ -2,6 +2,11 @@ agm-map {
     height: 900px;
 }
 
+.map-container {
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+
 .example-form {
     margin-top: 20px;
     min-width: 150px;
@@ -50,22 +55,18 @@ agm-map {
     /* Add a black text color */
     display: flex;
     /* Make it into a block element to fill the whole list */
-    .text{
+    .text {
         flex-direction: row;
     }
-    .img{
+    .img {
         flex-direction: row;
         margin-left: auto;
-        img{
-      
+        img {
             width: 150px;
             height: 150px;
-      
         }
     }
-
-    }
-
+}
 
 #myUL li a:hover:not(.header) {
     background-color: #eee;

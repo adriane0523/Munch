@@ -18,6 +18,15 @@ export class NavbarComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.isUserLoggedin();
+
+  }
+
+  get getLogin():boolean{
+    return this.loggedIn;
+  }
+
+  isUserLoggedin(){
     this.checkLogin.isUserLoggedIn().subscribe((result:authToken)=>{
       console.log("test" + result);
 
@@ -28,15 +37,6 @@ export class NavbarComponent implements OnInit {
       }
 
     });
-
-  }
-
-  get getLogin():boolean{
-    return this.loggedIn;
-  }
-
-  isUserLoggedin(){
-
   }
 
 

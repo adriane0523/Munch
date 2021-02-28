@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { restaurant } from 'src/lib/interfaces/interfaces';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CheckLoginService } from 'src/lib/check-login.service';
+import { authToken, restaurant } from 'src/lib/interfaces/interfaces';
 import { MapService } from './map.service';
 
 @Component({
@@ -12,13 +15,38 @@ export class MapComponent implements OnInit {
   lat:number = 33.4255;
   lng:number = -111.9400;
   restautants:restaurant[] = [];
+  myForm!: FormGroup;
   
   constructor(
-    private mapService: MapService
+    private mapService: MapService,
+    private elementRef: ElementRef,
+    private checkLogin: CheckLoginService,
+    private router: Router,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.checkLogin.isUserLoggedIn().subscribe((result:authToken)=>{
+      if (result && result.result === "false")
+      {
+        this.router.navigate(['/login'])
+      }
+    });
+
     this.mapService.get_home().subscribe((restaurants)=>
+    {
+      this.restautants = restaurants.result;
+      this.convertDollarsign();
+      console.log(this.restautants);
+    });
+
+    this.myForm = this.fb.group({
+      search: [''],
+    });
+  }
+
+  search_query():void{
+    this.mapService.search(this.myForm.value["search"]).subscribe((restaurants)=>
     {
       this.restautants = restaurants.result;
       this.convertDollarsign();
@@ -27,7 +55,11 @@ export class MapComponent implements OnInit {
 
   }
 
-  convertDollarsign(){
+  ngAfterViewInit():void{
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fff';
+ }
+  
+  convertDollarsign():void{
     for (let i = 0; i < this.restautants.length; i++)
     {
       if (this.restautants[i].price_level != '')
