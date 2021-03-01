@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpHelperService } from 'src/lib/httpHelper.service';
-import { getRestaurants, restaurant } from 'src/lib/interfaces/interfaces';
+import { getRestaurants, restaurant, send_auth_token } from 'src/lib/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +34,12 @@ export class MapService {
       catchError(this.httpHelper.handleError<getRestaurants>('search'))
     );
   }
+
+  like(query:string): Observable<send_auth_token> {
+    return this.http.get<send_auth_token>(this.apiUrl + "search?query="+query, this.httpOptions).pipe(
+      tap(_ => console.log("Success")),
+      catchError(this.httpHelper.handleError<send_auth_token>('search'))
+    );
+  }
+ 
 }

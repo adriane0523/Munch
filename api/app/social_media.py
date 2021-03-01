@@ -11,7 +11,7 @@ def friend():
     if (user_friend != None):
         user_user = User_User(  user_one_id = user.id, user_two_id = user_friend)
         result = 'true'
-    else
+    else:
         user_user = None
         result = 'false'
 

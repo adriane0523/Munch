@@ -1,52 +1,79 @@
-
 <div class="map-container">
-  <form  [formGroup]="myForm" class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Search</mat-label>
-      <input autocomplete="off" formControlName="search" matInput placeholder="search">
-      <button (click)="search_query()" mat-button matSuffix aria-label="search">
+    <form [formGroup]="myForm" class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input autocomplete="off" formControlName="search" matInput placeholder="search">
+            <button (click)="search_query()" mat-button matSuffix aria-label="search">
       <mat-icon>search</mat-icon>
       </button>
-    </mat-form-field>
+        </mat-form-field>
 
 
-    <div class="filter">
-    <mat-checkbox #c (click)="toggle(!c.checked)">Map View</mat-checkbox>
-      <button mat-stroked-button>Quick</button>
-      <button mat-stroked-button>Food</button>
-      <button mat-stroked-button>Places</button>
+        <div class="filter">
+            <mat-checkbox #c (click)="toggle(!c.checked)">Map View</mat-checkbox>
+            <button mat-stroked-button>Quick</button>
+            <button mat-stroked-button>Food</button>
+            <button mat-stroked-button>Places</button>
+        </div>
+    </form>
+
+
+    <div *ngIf="!c.checked">
+        <ul *ngFor="let r of restautants" id="myUL">
+            <li>
+                <a [routerLink]="['/restaurant', r.id]">
+                    <div class="text">
+                        <p class="first">{{r.name}} {{r.price_level}}</p>
+                        <p class second> {{r.addr}}</p>
+                        <div *ngFor="let m of r.menu; let indexOfelement=index;">
+                            <div class="item">
+                                <p style="font-size: 12px;margin:0;padding:0">{{indexOfelement + 1}}. {{m.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="img">
+
+                    </div>
+
+                </a>
+            </li>
+        </ul>
     </div>
-  </form>
 
 
-  <div *ngIf="!c.checked">
-  <ul *ngFor="let r of restautants" id="myUL">
-    <li><a [routerLink]="['/restaurant', r.id]">
-      <div class="text">
-        <p class="first">{{r.name}}</p>
-        <p class second> {{r.price_level}} {{r.addr}}</p>
-      </div>
-    
-    <!---
-      <div class="img">
-        <p>{{r.menu[0].name}}</p>
-        <img src="{{getImage(r)}}">
-      </div>-->
-    
-    </a></li>
-  </ul>
-  </div>
+    <div *ngIf="c.checked">
+        <!-- this creates a google map on the page with the given lat/lng from -->
+        <!-- the component as the initial center of the map: -->
+        <agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+
+            <div *ngFor="let r of restautants">
+                <agm-marker [latitude]="+r.latitude" [longitude]="+r.longitude" [label]="{color: 'black', text: r.name, fontSize: '12px'}" (click)="infoWindow.open();">
+
+                    <agm-info-window [disableAutoPan]="true" #infoWindow>
+
+                        <div>
+                            <p class="first">{{r.name}} {{r.price_level}}</p>
+                            <p class second> {{r.addr}}</p>
+                            <div *ngFor="let m of r.menu; let indexOfelement=index;">
+                                <div class="item">
+                                    <p style="font-size: 12px;margin:0;padding:0">{{indexOfelement + 1}}. {{m.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a [routerLink]="['/restaurant', r.id]">Open </a>
+                        </div>
+
+                    </agm-info-window>
+                </agm-marker>
 
 
-  <div *ngIf="c.checked">
-    <!-- this creates a google map on the page with the given lat/lng from -->
-    <!-- the component as the initial center of the map: -->
-    <agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
 
-    <div *ngFor="let r of restautants"> 
-    <agm-marker [latitude]="+r.latitude" [longitude]="+r.longitude">
-    </agm-marker></div>
 
-    </agm-map>
-  </div>
+            </div>
+
+
+        </agm-map>
+    </div>
 </div>

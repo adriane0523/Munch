@@ -1,0 +1,24 @@
+.page-container {
+    width: 40%;
+    margin: 50px auto 0 auto;
+    .item {
+        padding: 1em 0;
+        .description {
+            padding-left: 20px;
+        }
+    }
+    button {
+        margin-bottom: 10px;
+        color: #E18B29;
+    }
+    .like {
+        mat-icon {
+            font-size: 20px;
+        }
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    h1 {
+        display: inline;
+    }
+}

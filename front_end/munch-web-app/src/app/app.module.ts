@@ -14,6 +14,8 @@ import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
+import { AccountComponent } from './components/account/account.component';
+import { PreferencesComponent } from './components/preferences/preferences.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { RestaurantPageComponent } from './components/restaurant-page/restaurant
     MapComponent,
     NavbarComponent,
     RestaurantPageComponent,
+    AccountComponent,
+    PreferencesComponent,
     
   ],
   imports: [

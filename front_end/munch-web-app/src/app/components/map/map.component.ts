@@ -27,10 +27,11 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogin.isUserLoggedIn().subscribe((result:authToken)=>{
-      if (result && result.result === "false")
-      {
-        this.router.navigate(['/login'])
-      }
+        if (result && result.result === "false")
+        {
+          this.router.navigate(['/login'])
+        }
+    
     });
 
     this.mapService.get_home().subscribe((restaurants)=>

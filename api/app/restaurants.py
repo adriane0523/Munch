@@ -17,7 +17,7 @@ def getKey(item):
 @app.route('/search')
 def search():
     query = request.args.get('query', default="", type=str)
-    print(query)
+
     result_query = []
     result=[]
     restaurants = Restaurant.query.all()
@@ -85,6 +85,29 @@ def get_menu(id):
     
     return result
 
+@app.route('/get_restaurant', methods=['GET'])
+def get_restaurant():
+    query = request.args.get('query', default="", type=int)
+    restaurants = Restaurant.query.filter_by(id=query).first()
+    i = restaurants
+    result= {
+            "id":i.id,
+            "place_id": i.place_id,
+            "name": i.name,
+            "addr": i.addr,
+            "latitude": i.latitude,
+            "longitude": i.longitude,
+            "hours" : i.hours,
+            "google_rating" : i.google_rating,
+            "google_total_user_rating" : i.google_total_user_rating,
+            "munch_rating" : i.munch_rating,
+            "google_type" : i.google_type,
+            "munch_type" : i.munch_type,
+            "price_level" : i.price_level,
+            "menu":get_menu(i.id)
+    }
+    print(result)
+    return  jsonify(result)
 
 @app.route('/home', methods=['POST'])
 def home():
@@ -108,7 +131,7 @@ def home():
                 "price_level" : i.price_level,
                 "menu":get_menu(i.id)
         })
-        print(get_menu(i.id))
+
         count+=1
     return  jsonify({'result': result,
                     'description': "fetched restaurant items"
@@ -154,14 +177,14 @@ def get_random():
                     })
 
    
-@app.route('like_restaurant', methods=['POST'])
+@app.route('/like_restaurant', methods=['GET'])
 def like_restaurant():
-    json_data = request.json
+    query = request.args.get('query', default="", type=int)
     tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
     user = User.query.filter_by(id=tokenList.user_id).first()
     liked_restaurant = User_Restaurant(
         user_id = user.id,
-        restaurant_munch_id = json_data['restaurant_id']
+        restaurant_munch_id = query,
         time_spent = 0,
         rating = 0,
         like = True,
@@ -180,7 +203,7 @@ def like_restaurant():
                 })
 
 
-@app.route('get_like_restaurant', methods=['POST'])
+@app.route('/get_like_restaurant', methods=['POST'])
 def get_like_restaurant():
     json_data = request.json
     tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()

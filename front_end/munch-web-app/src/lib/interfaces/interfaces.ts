@@ -54,3 +54,8 @@ export interface register{
   emai:string;
   username:string;
 }
+
+export interface send_auth_token{
+  auth_token:string;
+  result:string;
+}
