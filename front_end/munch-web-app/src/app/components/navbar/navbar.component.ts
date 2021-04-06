@@ -39,6 +39,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  goToPreferences(){
+    this.router.navigate(['/preferences'])
+  }
+
+  
+  goToAccount(){
+    this.router.navigate(['/account'])
+  }
+
+    
+  goToSearch(){
+    this.router.navigate(['/map'])
+  }
+
 
   logout(){
     this.checkLogin.logout().subscribe((result:authToken)=>{

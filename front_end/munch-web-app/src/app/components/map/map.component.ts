@@ -37,8 +37,8 @@ export class MapComponent implements OnInit {
     this.mapService.get_home().subscribe((restaurants)=>
     {
       this.restautants = restaurants.result;
+      this.restautants.sort((a,b)=>b.percentage - a.percentage)
       this.convertDollarsign();
-      console.log(this.restautants);
     });
 
     this.myForm = this.fb.group({
@@ -50,8 +50,9 @@ export class MapComponent implements OnInit {
     this.mapService.search(this.myForm.value["search"]).subscribe((restaurants)=>
     {
       this.restautants = restaurants.result;
+      this.restautants.sort((a,b)=>b.percentage - a.percentage)
       this.convertDollarsign();
-      console.log(this.restautants);
+
     });
 
   }
@@ -59,7 +60,7 @@ export class MapComponent implements OnInit {
   ngAfterViewInit():void{
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#fff';
  }
-  
+
   convertDollarsign():void{
     for (let i = 0; i < this.restautants.length; i++)
     {
@@ -80,7 +81,7 @@ export class MapComponent implements OnInit {
     //const index = Math.floor((Math.random() * r.menu.length-1) + 0);
     const index = 0;
     if( r.menu[index] && r.menu[index] != undefined && r.menu[index].image && r.menu[index].image !=''){
-      return 'http://127.0.0.1:5000/static/photos/' + r.menu[index].image
+      return 'http://138.197.222.225/static/photos/' + r.menu[index].image
     }
     else return '';
 

@@ -11,7 +11,7 @@ import { getRestaurants, restaurant, send_auth_token } from 'src/lib/interfaces/
 export class MapService {
 
 
-  private apiUrl = "http://127.0.0.1:5000/";
+  private apiUrl = "http://138.197.222.225/";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,24 +22,16 @@ export class MapService {
   ) { }
 
   get_home(): Observable<getRestaurants> {
-    return this.http.post<getRestaurants>(this.apiUrl + "home", {}, this.httpOptions).pipe(
+    return this.http.post<getRestaurants>(this.apiUrl + "home", {"auth_token":localStorage.getItem("token")}, this.httpOptions).pipe(
       tap(_ => console.log("Success")),
       catchError(this.httpHelper.handleError<getRestaurants>('home'))
     );
   }
 
   search(query:string): Observable<getRestaurants> {
-    return this.http.get<getRestaurants>(this.apiUrl + "search?query="+query, this.httpOptions).pipe(
+    return this.http.post<getRestaurants>(this.apiUrl + "search?query="+query,{"auth_token":localStorage.getItem("token")}, this.httpOptions).pipe(
       tap(_ => console.log("Success")),
       catchError(this.httpHelper.handleError<getRestaurants>('search'))
     );
   }
-
-  like(query:string): Observable<send_auth_token> {
-    return this.http.get<send_auth_token>(this.apiUrl + "search?query="+query, this.httpOptions).pipe(
-      tap(_ => console.log("Success")),
-      catchError(this.httpHelper.handleError<send_auth_token>('search'))
-    );
-  }
- 
 }

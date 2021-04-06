@@ -26,11 +26,9 @@ def check_login():
     username = ""
     
     if tokenList is not None:
-        print(datetime.datetime.utcnow())
-        print(tokenList.expiration)
         if (datetime.datetime.utcnow() < tokenList.expiration):
             status = 'true'
-            message = "Successfully logged in."\
+            message = "Successfully logged in."
             
             user = User.query.filter_by(id=tokenList.user_id).first()
             username = user.username

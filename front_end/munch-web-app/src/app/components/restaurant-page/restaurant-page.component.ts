@@ -32,14 +32,21 @@ export class RestaurantPageComponent implements OnInit {
 
   back(): void {
     this.router.navigate(["/map"]);
-}
+  }
 
-like(): void{
-  this.restaurantPageService.like(this.id).subscribe((result)=>  this._snackBar.open("Liked " + this.restaurant.name, "Dismiss", {
-    duration: 4000,
-    }));
- 
-}
-
-
+  like(): void{
+    this.restaurantPageService.like(this.id).subscribe((result)=> 
+    {
+      if(result.result === 'True'){
+        this._snackBar.open("Liked " + this.restaurant.name, "Dismiss", {
+          duration: 5000,
+          })
+      }
+      else{
+        this._snackBar.open(this.restaurant.name + " Already Liked", "Dismiss", {
+          duration: 5000,
+          })
+      }     
+    });
+  }
 }

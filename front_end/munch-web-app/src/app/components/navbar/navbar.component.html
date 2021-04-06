@@ -3,13 +3,18 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item>
+      <button (click)="goToAccount()" mat-menu-item>
         <mat-icon>account_box</mat-icon>
         <span>Account</span>
       </button>
-      <button mat-menu-item>
+      <button (click)="goToPreferences()" mat-menu-item>
         <mat-icon>toc</mat-icon>
         <span>Preferences</span>
+      </button>
+      
+      <button (click)="goToSearch()" mat-menu-item>
+        <mat-icon>find_in_page</mat-icon>
+        <span>Search</span>
       </button>
      
       <button mat-menu-item  (click)="logout()">

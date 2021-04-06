@@ -1,0 +1,25 @@
+<div class="page-container">
+    <ng-flash-message></ng-flash-message>
+    <div>
+        <h1>Hello, {{current_user}}</h1>
+
+        <form [formGroup]="myForm" class="form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Add Friends</mat-label>
+                <input autocomplete="off" formControlName="username" matInput placeholder="username">
+                <button (click)="add_friends()" mat-button matSuffix aria-label="username"><mat-icon>add</mat-icon> </button>
+            </mat-form-field>
+        </form>
+
+        <h2>Your Friends:</h2>
+        <div *ngIf="users.length === 0">
+            <p>No Current Fiends</p>
+        </div>
+        <div *ngFor="let user of users; let indexOfelement=index;">
+            <div class="item">
+                <p>{{indexOfelement + 1}}. {{user.username}}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
