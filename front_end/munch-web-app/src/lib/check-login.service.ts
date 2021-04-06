@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 })
 export class CheckLoginService {
 
-  private apiUrl = "http://127.0.0.1:5000";
+  private apiUrl = "http://138.197.222.225";
   constructor(
     private http: HttpClient,
     private httpHelper: HttpHelperService,
