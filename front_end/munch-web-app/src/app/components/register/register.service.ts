@@ -11,7 +11,7 @@ import { register } from 'src/lib/interfaces/interfaces';
 })
 export class RegisterService {
 
-  private apiUrl = "http://127.0.0.1:5000/register";
+  private apiUrl = "http://138.197.222.225/register";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,6 +21,8 @@ export class RegisterService {
     private http: HttpClient,
     private httpHelper: HttpHelperService
   ) { }
+
+
 
   register(username:string, password:string, email:string): Observable<register> {
     return this.http.post<register>(this.apiUrl, {username:username, password:password, email:email}, this.httpOptions).pipe(

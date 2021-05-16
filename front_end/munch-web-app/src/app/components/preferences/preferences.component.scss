@@ -1,0 +1,31 @@
+.page-container {
+    width: 40%;
+    margin: 50px auto 0 auto;
+    .form {
+        margin: 2em 0;
+    }
+    button {
+        margin-bottom: 10px;
+        color: #E18B29;
+    }
+    .content {
+        margin-top: 20px;
+    }
+    .like {
+        mat-icon {
+            font-size: 20px;
+        }
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    a {
+        text-decoration: none;
+        color: #E18B29;
+    }
+    a:hover {
+        color: black;
+    }
+    h1 {
+        display: inline;
+    }
+}

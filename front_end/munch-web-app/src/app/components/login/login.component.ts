@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import {LoginService} from "./login.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss', '../../app.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar,
     private checkLogin: CheckLoginService,
+    private elementRef: ElementRef
 
    )  { }
 
@@ -39,6 +40,14 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
 
+  }
+
+  ngAfterViewInit(){
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#E18B29';
+ }
+
+  register(){
+    this.router.navigate(['/register'])
   }
 
   onSubmit() {

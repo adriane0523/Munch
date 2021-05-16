@@ -36,6 +36,7 @@ export interface restaurant{
   munch_type:string;
   price_level:string;
   menu: menu[];
+  percentage:number;
 }
 
 export interface menu{
@@ -53,4 +54,24 @@ export interface register{
   result:string;
   emai:string;
   username:string;
+}
+
+export interface send_auth_token{
+  auth_token:string;
+  result:string;
+}
+
+
+
+export interface add_friends{
+  result:string;
+}
+
+export interface get_friends{
+  result:user[];
+}
+
+
+export interface user{
+  username:string
 }

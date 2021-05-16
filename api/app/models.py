@@ -70,6 +70,7 @@ class User_User(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     user_one_id = db.Column(db.Integer)
     user_two_id = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, nullable=True)
 
 #restaurant history
 class User_Restaurant(db.Model):
@@ -80,6 +81,7 @@ class User_Restaurant(db.Model):
     time_spent = db.Column(db.Float, nullable=True)
     rating = db.Column(db.Float, nullable=True)
     like = db.Column(db.Boolean, nullable=True)
+    timestamp = db.Column(db.DateTime, nullable=True)
 
 class User_Menu_Item(db.Model):
     __tablename__ = 'user_menu_item'

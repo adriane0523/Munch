@@ -1,0 +1,26 @@
+<div class="page-container">
+    <ng-flash-message></ng-flash-message>
+    <div class="button"><button mat-stroked-button (click)="back()">Back to Search</button>
+    </div>
+
+
+    <hr>
+    <div>
+        <h1>{{restaurant.name}}</h1> <button (click)="like()" class="like"><mat-icon>favorite</mat-icon></button>
+    </div>
+    <p> price: {{restaurant.price_level}} </p>
+    <p>Address: {{restaurant.addr}}</p>
+    <p>google rating: {{restaurant.google_rating}}</p>
+    <p>Total user rating: {{restaurant.google_total_user_rating}}</p>
+    <p>Type: {{restaurant.google_type}}</p>
+    <p>Food Type: {{restaurant.munch_type}}</p>
+
+    <h2>Top Menu Items:</h2>
+    <div *ngFor="let m of restaurant.menu; let indexOfelement=index;">
+        <div class="item">
+            <p>{{indexOfelement + 1}}. {{m.name}} {{m.price}}</p>
+            <p class="description">{{m.description}} </p>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="page-container">
+    <ng-flash-message></ng-flash-message>
+    <div>
+        <h1>Hello, {{current_user}}</h1>
+        <div class="content">
+            <h2>Your liked restaurants:</h2>
+            <div *ngIf="liked_restaurants.length === 0">
+                <p>No Current Liked restaurants</p>
+            </div>
+            <div *ngFor="let r of liked_restaurants; let indexOfelement=index;">
+                <div class="item">
+                    <p>{{indexOfelement + 1}}.
+                        <a [routerLink]="['/restaurant', r.id]">{{r.name}} </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

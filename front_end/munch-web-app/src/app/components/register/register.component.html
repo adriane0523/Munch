@@ -27,7 +27,8 @@
      
 
       </mat-card-content>
-      <button type="submit" [disabled]="checkPasswords()" mat-stroked-button color="accent" class="btn-block" >Register</button>
+      <button type="submit" [disabled]="checkPasswords()" mat-stroked-button class="btn-block" >Finish Registering</button>
+      <a class="register" routerLink="register" routerLinkActive="active" (click)="login()">Already have an account? Login now</a>
     </form>
   </mat-card>
 

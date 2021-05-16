@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {RegisterService } from './register.service';
@@ -18,7 +18,10 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private registerService : RegisterService,
     private router: Router,
+    private elementRef: ElementRef
     ) {}
+
+
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -27,6 +30,15 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(1)]],
       password_again: ['', [Validators.required, Validators.minLength(1)]]
     });
+  }
+  
+  ngAfterViewInit(){
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#E18B29';
+ }
+
+
+  login(){
+    this.router.navigate(['/login'])
   }
 
   onSubmit() {
