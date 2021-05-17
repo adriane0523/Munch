@@ -15,7 +15,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def getKey(item):
     return item[1]
 
-@app.route('/search',  methods=['POST'])
+@app.route('/search',  methods=['GET', 'POST'])
 def search():
     query = request.args.get('query', default="", type=str)
     json_data = request.json
@@ -92,7 +92,7 @@ def search():
         "description":"query results"
     }
 
-@app.route('/get_reccomended_restaurants/')
+@app.route('/get_reccomended_restaurants/', methods=['GET', 'POST'])
 def get_reccomended_restaurants(query):
     pass
 
@@ -114,7 +114,7 @@ def get_menu(id):
     
     return result
 
-@app.route('/get_restaurant', methods=['GET'])
+@app.route('/get_restaurant', methods=['GET', 'POST'])
 def get_restaurant():
     query = request.args.get('query', default="", type=int)
     restaurants = Restaurant.query.filter_by(id=query).first()
@@ -138,7 +138,7 @@ def get_restaurant():
     print(result)
     return  jsonify(result)
 
-@app.route('/home', methods=['POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     json_data = request.json
     tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
@@ -243,7 +243,7 @@ def home():
                     })
 
 
-@app.route('/random', methods=['POST'])
+@app.route('/random', methods=['GET', 'POST'])
 def get_random():
     json_data = request.json
     tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()
@@ -282,7 +282,7 @@ def get_random():
                     })
 
    
-@app.route('/like_restaurant', methods=['POST'])
+@app.route('/like_restaurant', methods=['GET', 'POST'])
 def like_restaurant():
     json_data = request.json
     query = request.args.get('query', default="", type=int)
@@ -319,7 +319,7 @@ def like_restaurant():
                 })
 
 
-@app.route('/get_like_restaurant', methods=['POST'])
+@app.route('/get_like_restaurant',  methods=['GET', 'POST'])
 def get_like_restaurant():
     json_data = request.json
     tokenList = TokenList.query.filter_by(auth_token=json_data['auth_token']).first()

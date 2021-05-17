@@ -74,7 +74,7 @@ def restaurants():
     
 
 
-@app.route('/get/<id>')
+@app.route('/get/<id>', methods=['GET', 'POST'])
 def get(id):
     r = Restaurant.query.filter_by(id=id).first()
 
@@ -94,7 +94,7 @@ def get(id):
     })
     
 
-@app.route('/edit/<id>')
+@app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit(id):
     json_data = request.json
     r = Restaurant.query.filter_by(id=id).first()
@@ -116,7 +116,7 @@ def edit(id):
 
 
 
-@app.route('/get_menu/<id>')
+@app.route('/get_menu/<id>', methods=['GET', 'POST'])
 def get_menu(id):
     m = Menu_Item.query.filter_by(id=id)
     result = []
