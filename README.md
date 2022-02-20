@@ -1,54 +1,70 @@
-<div align="center" id="top"> 
-
-  &#xa0;
-
-  <!-- <a href="https://munch.netlify.app">Demo</a> -->
-</div>
-
 <h1 align="center">Munch</h1>
 
 <br>
 
 ## :dart: About ##
 
-Describe your project
+Munch is a project that aims to recommend restaurants based on your personal preferances and liked restaurants.
+The web app offers everything from a functional login and register system, recommendation score, friend system, search, and info display.
 
-## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+Mobile Demo:
+https://youtu.be/n2AeTzv0zl8
+
+Web App Demo:
+https://youtu.be/TbIBv9u7GXU
+
 
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
-
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
+Web app
+- [Angular](https://angular.io/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## :white_check_mark: Requirements ##
+Mobile
+- [Flutter](https://flutter.dev)
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+API
+- Python(https://www.python.org/)
+- Flask(https://flask.palletsprojects.com/en/2.0.x/)
+
+
+## :white_check_mark: Architecture ##
+Login and register utilizes JWT Architecture. All session tokens are stored locally on the web browser and tokens are generated server side
+
+ ![image](https://user-images.githubusercontent.com/38186787/154869758-e7fff702-31b5-4e35-bb1f-4cc86f438280.png)
+
+Recommendation and searching utilizes the sklearn library where we vectorize the liked restaurants and friend-liked restaurants into a TF-ID matrix and find the cosine similarity based on the search params of other restaurants.
+
+![image](https://user-images.githubusercontent.com/38186787/154869748-0b3a3e18-f1d7-40f8-b2df-7fd25bb0b0df.png)
+
 
 ## :checkered_flag: Starting ##
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/munch
+$ git clone https://github.com/adriane0523/munch
 
-# Access
-$ cd munch
+# Access API
+$ cd munch/Api
 
 # Install dependencies
-$ yarn
+$ python -m venv venv
+$ soruce venv/bin/activate
+$ pip install -r requirements.txt
+$ flask run
 
-# Run the project
-$ yarn start
+# Run the FE web app
+$ cd front_end/munch-web-app
+$ npm install 
+$ ng serve
 
-# The server will initialize in the <http://localhost:3000>
+# Run the FE Mobile
+$ cd front_end/munch_mobile
+# Within code editor open ios sim or android
+# Run debug
+
 ```
 
 ## :memo: License ##
@@ -56,7 +72,7 @@ $ yarn start
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/adriane0523 target="_blank">{{YOUR_NAME}}</a>
 
 &#xa0;
 
