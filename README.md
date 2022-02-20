@@ -2,19 +2,21 @@
 
 <br>
 
-![154870098-6b8559cb-71bc-413a-877c-0985f0452755](https://user-images.githubusercontent.com/38186787/154870118-59677dc4-4583-41da-bd72-f2eaf1e268d0.png)
-
 ## :dart: About ##
 
 Munch is a project that aims to recommend restaurants based on your personal preferances and liked restaurants.
 The web app offers everything from a functional login and register system, recommendation score, friend system, search, and info display.
 
-
+## 💂‍♂️ Demos ##
 Mobile Demo:
 https://youtu.be/n2AeTzv0zl8
 
 Web App Demo:
 https://youtu.be/TbIBv9u7GXU
+
+
+![154870098-6b8559cb-71bc-413a-877c-0985f0452755](https://user-images.githubusercontent.com/38186787/154870118-59677dc4-4583-41da-bd72-f2eaf1e268d0.png)
+
 
 ## :rocket: Technologies ##
 
