@@ -14,7 +14,6 @@ https://youtu.be/n2AeTzv0zl8
 Web App Demo:
 https://youtu.be/TbIBv9u7GXU
 
-
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
@@ -34,10 +33,10 @@ API
 Login and register utilizes JWT Architecture. All session tokens are stored locally on the web browser and tokens are generated server side
 
  ![image](https://user-images.githubusercontent.com/38186787/154869758-e7fff702-31b5-4e35-bb1f-4cc86f438280.png)
-
+ 
 Recommendation and searching utilizes the sklearn library where we vectorize the liked restaurants and friend-liked restaurants into a TF-ID matrix and find the cosine similarity based on the search params of other restaurants.
 
-![image](https://user-images.githubusercontent.com/38186787/154869748-0b3a3e18-f1d7-40f8-b2df-7fd25bb0b0df.png)
+![image](https://user-images.githubusercontent.com/38186787/154869982-11fa4afb-9e4a-40bd-8ade-1e8d2bc3bcee.png)
 
 
 ## :checkered_flag: Starting ##
