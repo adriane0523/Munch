@@ -1,6 +1,8 @@
 <h1 align="center">Munch</h1>
 
 <br>
+![image](https://user-images.githubusercontent.com/38186787/154870073-3c4c14f9-4315-4a91-b7c5-3346f7da7c6d.png)
+
 
 ## :dart: About ##
 
