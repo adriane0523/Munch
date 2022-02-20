@@ -10,7 +10,7 @@ import { add_friends, get_friends, restaurant } from 'src/lib/interfaces/interfa
   providedIn: 'root'
 })
 export class PreferencesService {
-  private apiUrl = "http://138.197.222.225/";
+  private apiUrl = "http://127.0.0.1:5000/";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

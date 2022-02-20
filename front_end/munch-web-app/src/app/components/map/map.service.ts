@@ -11,7 +11,7 @@ import { getRestaurants, restaurant, send_auth_token } from 'src/lib/interfaces/
 export class MapService {
 
 
-  private apiUrl = "http://138.197.222.225/";
+  private apiUrl = "http://127.0.0.1:5000/";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

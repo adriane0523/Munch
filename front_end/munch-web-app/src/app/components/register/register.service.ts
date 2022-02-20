@@ -11,7 +11,7 @@ import { register } from 'src/lib/interfaces/interfaces';
 })
 export class RegisterService {
 
-  private apiUrl = "http://138.197.222.225/register";
+  private apiUrl = "http://127.0.0.1:5000/register";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

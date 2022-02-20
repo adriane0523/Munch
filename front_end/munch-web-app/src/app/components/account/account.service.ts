@@ -11,7 +11,7 @@ import { add_friends, authToken, get_friends, send_auth_token } from 'src/lib/in
 })
 export class AccountService {
 
-  private apiUrl = "http://138.197.222.225/";
+  private apiUrl = "http://127.0.0.1:5000/";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

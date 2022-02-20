@@ -12,7 +12,7 @@ import { login } from 'src/lib/interfaces/interfaces'
 })
 export class LoginService {
 
-  private apiUrl = "http://138.197.222.225/login";
+  private apiUrl = "http://127.0.0.1:5000/login";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
