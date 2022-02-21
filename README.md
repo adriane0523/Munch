@@ -74,9 +74,6 @@ $ cd front_end/munch_mobile
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-
-Made with :heart: by <a href="https://github.com/adriane0523 target="_blank">{{YOUR_NAME}}</a>
-
 &#xa0;
 
 <a href="#top">Back to top</a>
