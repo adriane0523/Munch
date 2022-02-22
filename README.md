@@ -4,7 +4,7 @@
 
 ## :dart: About ##
 
-Munch is a project that aims to recommend restaurants based on your personal preferances and liked restaurants.
+Munch is a project that aims to recommend restaurants based on your personal preferences and liked restaurants.
 The web app offers everything from a functional login and register system, recommendation score, friend system, search, and info display.
 
 ## 💂‍♂️ Demos ##
