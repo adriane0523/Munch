@@ -31,6 +31,7 @@ Mobile
 API
 - Python(https://www.python.org/)
 - Flask(https://flask.palletsprojects.com/en/2.0.x/)
+- [JWT](https://pyjwt.readthedocs.io/en/stable/)
 
 
 ## :white_check_mark: Architecture ##
